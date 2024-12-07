@@ -9,36 +9,35 @@ if (!empty($_GET)) {
   $id = $_GET["id"];
 }
 
-/* PODEMOS IMPLEMENTAR ESSAS FUNCIONALIDADES NO MODEL ??? */
-
 if (!empty($id)) {
 
   /* Retorna os dados de um contato (showService) */
-  /* Seleciona os dados relativos ao id para o showService encontrar */
 
-  $stmt = $conn->prepare("SELECT * FROM servico WHERE id = :id");
-  $stmt->bindParam(":id", $id);
-  $stmt->execute();
-  $oneservice = $stmt->fetch();
+  /* Incializa a variável que vai receber o serviço do método mostrarUnico */
+  $oneservice = null;
+  
+  /*  Chama o construtor apenas com a conexão de argumento */
+  $service = new Servico($conn);
+
+  /* Chama o método que seleciona os atributos de um unico registro (para icon eye) */
+  $oneservice = $service->mostrarUnico($id);
 
 } else {
 
   /* Retorna todos os contatos */
 
-  /* Incializa a variável que vai receber os serviços como um array vazio */
+  /* Incializa a variável que vai receber os serviços do método mostrarTodos */
   $services = [];
 
-  /* Seleciona também o id para a funcionalidade do showService */
-  $stmt = $conn->prepare("SELECT id, clienteNome, animalNome, servicoTipo, valor 
-    FROM servico");
-  $stmt->execute();
+  /*  Chama o construtor apenas com a conexão de argumento */
+  $service = new Servico($conn);
 
-  $services = $stmt->fetchAll();
+  /* Chama o método que seleciona os principais atributos de todos os registros (para a listagem na home) */
+  $services = $service->mostrarTodos();
+
 }
 
-
-
-/* Para a funcionalidade de editar (usando POO) */
+/* PROCESSAMENTO PARA EDITAR e DELETAR */
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -46,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     /* id para saber de qual vai atualizar */
     $id = $_POST["id"];
 
-    /* Nome do Cliente que veio do hidden para editar */
+    /* Nome do Cliente que veio do hidden */
     $clienteNome = $_POST["clienteNome"];
 
     $clienteEmail = $_POST["clienteEmail"];

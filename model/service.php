@@ -54,8 +54,8 @@ class Servico
     public function editar($id)
     {
         $stmt = $this->conn->prepare("UPDATE servico SET clienteEmail = :clienteEmail, clienteTelefone = :clienteTelefone, 
-    animalTipo = :animalTipo, animalNome = :animalNome, animalRaca = :animalRaca, servicoTipo = :servicoTipo, 
-    valor = :valor WHERE id = :id AND clienteNome = :clienteNome");
+        animalTipo = :animalTipo, animalNome = :animalNome, animalRaca = :animalRaca, servicoTipo = :servicoTipo, 
+        valor = :valor WHERE id = :id AND clienteNome = :clienteNome");
 
         $stmt->bindParam(":clienteNome", $this->clienteNome);
         $stmt->bindParam(":clienteEmail", $this->clienteEmail);
@@ -78,7 +78,29 @@ class Servico
 
         $stmt->execute();
     }
-    
+
+    public function mostrarTodos()
+    {
+        $services = [];
+
+        $stmt = $this->conn->prepare("SELECT id, clienteNome, animalNome, servicoTipo, valor 
+        FROM servico");
+        $stmt->execute();
+
+        $services = $stmt->fetchAll();
+        return $services;
+    }
+
+    public function mostrarUnico($id) 
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM servico WHERE id = :id");
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $oneservice = $stmt->fetch();
+
+        return $oneservice;
+    }
+
 }
 
 ?>
