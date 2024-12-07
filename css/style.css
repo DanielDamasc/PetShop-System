@@ -1,0 +1,151 @@
+/* Background do body de todas as views */
+body {
+    background-color: #f4f4f4;
+}
+
+/* CSS do btn que retorna para a home */
+#back-link {
+    border: 1px solid #007bff;
+    color: #007bff;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+#back-link:hover {
+    text-decoration: none;
+}
+
+/* HEADER */
+header {
+    color: white;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)),
+        url('../img/header.png');
+    background-position: center;
+    background-repeat: repeat;
+    height: 60px;
+}
+
+
+
+/*  CSS DO LOGIN !!! */
+
+/* CSS do container do conteúdo principal */
+.main-container {
+    max-width: 88rem;
+    margin-top: 8rem;
+    min-height: 32rem;
+    padding: 0;
+}
+
+.main-container>div {
+    flex: 1 1 500px;
+}
+
+/* CSS dos containers de conteúdo */
+.desc-container,
+.login-container {
+    margin: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.desc-container li {
+    list-style-type: none;
+}
+
+
+
+/* CSS DA HOME !!! */
+
+/* CSS do título */
+#main-title {
+    text-align: center;
+    margin: 15px 0 30px;
+}
+
+/* CSS da tabela */
+#services-table {
+    /* Técnica para manter centralizado. */
+    max-width: 800px;
+    margin: 0 auto;
+
+}
+
+#services-table thead {
+    color: #FFF;
+    background-color: #b54800;
+}
+
+/* CSS dos icons */
+.actions {
+    text-align: right;
+    width: 150px;
+}
+
+.actions i {
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.check-icon {
+    color: #1e7e34;
+}
+
+.edit-icon {
+    color: #007bff;
+}
+
+.delete-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+.delete-icon {
+    color: #bd2130;
+}
+
+/* CSS para quando a lista de serviços estiver vazia */
+#empty-list-text {
+    text-align: center;
+}
+
+/* Estilos do botão de novo serviço */
+.circle {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    width: 60px;
+    height: 60px;
+    background-color: #ce5100;
+    border-radius: 50%;
+    z-index: 1000;
+}
+
+.addService {
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+
+/* CSS DA SHOW !!! */
+
+/* Estilos do container que mostra os dados do cliente */
+#view-service-container {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 2rem;
+    border: 1px solid #ce5100;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+/* Estilo do 'label' dos dados */
+.bold {
+    font-weight: bold;
+    margin-right: 5px;
+}
