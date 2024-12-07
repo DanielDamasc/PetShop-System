@@ -15,7 +15,7 @@ if (!empty($id)) {
 
   /* Incializa a variável que vai receber o serviço do método mostrarUnico */
   $oneservice = null;
-  
+
   /*  Chama o construtor apenas com a conexão de argumento */
   $service = new Servico($conn);
 
@@ -59,14 +59,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     /* Chama o construtor apenas com a conexão de argumento */
     $service = new Servico($conn);
     /* Chama o método que inicializa o restante das variáveis */
-    $service->inicializar($clienteNome,
-    $clienteEmail,
-    $clienteTelefone,
-    $animalTipo,
-    $animalNome,
-    $animalRaca,
-    $servicoTipo,
-    $valor);
+    $service->inicializar(
+      $clienteNome,
+      $clienteEmail,
+      $clienteTelefone,
+      $animalTipo,
+      $animalNome,
+      $animalRaca,
+      $servicoTipo,
+      $valor
+    );
 
     /* Chama a função de editar da classe no model */
     $service->editar($id);

@@ -16,7 +16,7 @@ if (!isset($_SESSION["email"])) {
 ?>
 
 <main>
-    <h1 style="text-align: center;">Editar Serviço</h1>
+    <h1 id="main-title">Editar Serviço</h1>
     <form style="margin-top: 0.6rem;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);" class="container p-4 border border-primary" method="POST"
@@ -63,16 +63,20 @@ if (!isset($_SESSION["email"])) {
         </div>
 
         <!-- Usar required em apenas um radio funciona para todos -->
+        <!-- Uso do ternário em cada input para ver se é o valor correspondente -->
         <div class="form-check">
-            <input class="form-check-input" type="radio" value="banho" name="servicoTipo" id="banho" required>
+            <input class="form-check-input" type="radio" value="banho" name="servicoTipo" id="banho" required
+            <?= $oneservice["servicoTipo"] === 'banho' ? 'checked' : '' ?>>
             <label class="form-check-label" for="banho">Banho</label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" value="tosa" name="servicoTipo" id="tosa">
+            <input class="form-check-input" type="radio" value="tosa" name="servicoTipo" id="tosa"
+            <?= $oneservice["servicoTipo"] === 'tosa' ? 'checked' : '' ?>>
             <label class="form-check-label" for="tosa">Tosa</label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" value="unha" name="servicoTipo" id="unha">
+            <input class="form-check-input" type="radio" value="unha" name="servicoTipo" id="unha"
+            <?= $oneservice["servicoTipo"] === 'unha' ? 'checked' : '' ?>>
             <label class="form-check-label" for="unha">Unhas</label>
         </div>
 

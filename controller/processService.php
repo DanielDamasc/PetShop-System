@@ -2,33 +2,30 @@
 
 require_once("../controller/connection.php");
 require_once("../model/service.php");
+include_once("../utilities/formatData.php");
 
 /* Arquivo que processa o CREATE de serviços */
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $clienteNome = $_POST["clienteNome"];
-    $clienteEmail = $_POST["clienteEmail"];
-    $clienteTelefone = $_POST["clienteTelefone"];
-    $animalTipo = $_POST["animalTipo"];
-    $animalNome = $_POST["animalNome"];
-    $animalRaca = $_POST["animalRaca"];
-    $servicoTipo = $_POST["servicoTipo"];
-    $valor = $_POST["valor"];
+    /* Função que irá realizar a sanitização dos dados */
+    $dados = sanitizacao($_POST);
 
     /* Chama o construtor apenas com a conexão de argumento */
     $service = new Servico($conn);
-    /* Chama o método que inicializa o restante das variáveis */
-    $service->inicializar($clienteNome,
-    $clienteEmail,
-    $clienteTelefone,
-    $animalTipo,
-    $animalNome,
-    $animalRaca,
-    $servicoTipo,
-    $valor);
 
-    /* VALIDAÇÃO DE ALGUM ERRO AQUI ??? */
+    /* Chama o método que inicializa o restante das variáveis */
+    $service->inicializar(
+        $dados["clienteNome"],
+        $dados["clienteEmail"],
+        $dados["clienteTelefone"],
+        $dados["animalTipo"],
+        $dados["animalNome"],
+        $dados["animalRaca"],
+        $dados["servicoTipo"],
+        $dados["valor"]
+    );
+
     $service->salvar();
 
     /* Encerra a variável da conexão */

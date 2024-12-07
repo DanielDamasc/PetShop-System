@@ -12,7 +12,7 @@ if (!isset($_SESSION["email"])) {
 ?>
 
 <main>
-    <h1 style="text-align: center;">Novo Serviço</h1>
+    <h1 id="main-title">Novo Serviço</h1>
     <!-- Coloca o action para o arquivo de processamento que depois retorna os usuários para a HOME -->
     <!-- COMO FAZER O TRATAMENTO DOS CAMPOS ??? -->
     <form style="margin-top: 0.6rem;

@@ -13,7 +13,7 @@ if (!isset($_SESSION["email"])) {
 
 ?>
 
-<h1 style="margin-bottom: -24px;" id="main-title">Cliente: <?= $oneservice["clienteNome"] ?></h1>
+<h1 style="margin: 200px 0 -24px; font-size: 32px" id="main-title">Cliente: <?= $oneservice["clienteNome"] ?></h1>
 
 <div id="view-service-container" class="container service-data">
     <div class="show-item d-flex">
