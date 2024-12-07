@@ -6,7 +6,7 @@ require_once("../model/service.php");
 $id;
 
 if (!empty($_GET)) {
-  $id = $_GET['id'];
+  $id = $_GET["id"];
 }
 
 /* PODEMOS IMPLEMENTAR ESSAS FUNCIONALIDADES NO MODEL ??? */
@@ -40,7 +40,7 @@ if (!empty($id)) {
 
 /* Para a funcionalidade de editar (usando POO) */
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   if ($_POST["type"] === "edit") {
     /* id para saber de qual vai atualizar */
@@ -57,17 +57,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $servicoTipo = $_POST["servicoTipo"];
     $valor = $_POST["valor"];
 
-    $service = new Servico(
-      $clienteNome,
-      $clienteEmail,
-      $clienteTelefone,
-      $animalTipo,
-      $animalNome,
-      $animalRaca,
-      $servicoTipo,
-      $valor,
-      $conn
-    );
+    /* Chama o construtor apenas com a conexão de argumento */
+    $service = new Servico($conn);
+    /* Chama o método que inicializa o restante das variáveis */
+    $service->inicializar($clienteNome,
+    $clienteEmail,
+    $clienteTelefone,
+    $animalTipo,
+    $animalNome,
+    $animalRaca,
+    $servicoTipo,
+    $valor);
 
     /* Chama a função de editar da classe no model */
     $service->editar($id);
@@ -76,6 +76,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: ../view/home.php");
     exit;
 
+  } else if ($_POST["type"] === "delete") {
+    /* id para saber de qual vai deletar */
+    $id = $_POST["id"];
+
+    /* Chama apenas o construtor que passa a conexão (não precisa de argumentos) */
+    $service = new Servico($conn);
+
+    /* Chama a função para deletar um registro no model */
+    $service->deletar($id);
+
+    /* Fica na mesma página após o delete */
+    header("Location: ../view/home.php");
+    exit;
   }
 
 }

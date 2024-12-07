@@ -6,7 +6,7 @@ include_once("../controller/processList.php");
 session_start();
 
 /* Não deixa usuário entrar nessa URL se não tiver feito login */
-if (!isset($_SESSION['email'])) {
+if (!isset($_SESSION["email"])) {
     header("Location: ../view/index.php");
     exit;
 }
@@ -33,20 +33,28 @@ if (!isset($_SESSION['email'])) {
                 <tbody>
                     <?php foreach ($services as $oneservice): ?>
                         <tr>
-                            <td scope="row"><?= $oneservice['clienteNome'] ?></td>
-                            <td scope="row"><?= $oneservice['animalNome'] ?></td>
-                            <td scope="row"><?= $oneservice['servicoTipo'] ?></td>
-                            <td scope="row"><?= $oneservice['valor'] ?></td>
+                            <td scope="row"><?= $oneservice["clienteNome"] ?></td>
+                            <td scope="row"><?= $oneservice["animalNome"] ?></td>
+                            <td scope="row"><?= $oneservice["servicoTipo"] ?></td>
+                            <td scope="row"><?= $oneservice["valor"] ?></td>
                             <td class="actions">
 
                                 <!-- O id é passado na URL de destino -->
-                                <a href="../view/showService.php?id=<?= $oneservice['id'] ?>"><i
+                                <a href="../view/showService.php?id=<?= $oneservice["id"] ?>"><i
                                         class="fas fa-eye check-icon"></i></a>
 
-                                <a href="../view/editService.php?id=<?= $oneservice['id'] ?>"><i
+                                <a href="../view/editService.php?id=<?= $oneservice["id"] ?>"><i
                                         class="far fa-edit edit-icon"></i></a>
 
-                                <button class="delete-btn" type="submit"><i class="fas fa-times delete-icon"></i></button>
+                                <!-- Versatilidade para fazer o delete usando form -->
+                                <form class="delete-form" action="../controller/processList.php" method="POST">
+                                    <!-- Hidden para informar o tipo de operação e quem deletar -->
+                                    <input type="hidden" name="type" value="delete">
+                                    <input type="hidden" name="id" value="<?= $oneservice["id"] ?>">
+
+                                    <button class="delete-btn" type="submit"><i class="fas fa-times delete-icon"></i></button>
+                                </form>
+
                             </td>
                         </tr>
                     <?php endforeach; ?>

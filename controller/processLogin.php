@@ -5,10 +5,10 @@ include_once("../controller/connection.php");
 $erro_pass = "";
 $erro_user = "";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $email = $_POST['l_email'];
-    $senha = $_POST['l_senha'];
+    $email = $_POST["l_email"];
+    $senha = $_POST["l_senha"];
 
     $stmt = $conn->prepare("SELECT email, senha FROM user WHERE email = :email");
     ;
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 /* Inicia uma variável de sessão usando o email */
                 session_start();
 
-                $_SESSION['email'] = $row['email'];
+                $_SESSION["email"] = $row["email"];
 
                 /* Redireciona o usuário para a página de home */
                 header("Location: ../view/home.php");

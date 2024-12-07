@@ -4,7 +4,7 @@ include_once("../view/header.php");
 session_start();
 
 /* Não deixa usuário entrar nessa URL se não tiver feito login */
-if (!isset($_SESSION['email'])) {
+if (!isset($_SESSION["email"])) {
     header("Location: ../view/index.php");
     exit;
 }
