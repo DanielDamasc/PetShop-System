@@ -13,6 +13,7 @@ class Servico
     private $valor;
     private $conn;
 
+    /* Construtor vem por definição os valores nulos, menos a conexão */
     public function __construct($clienteNome, $clienteEmail, $clienteTelefone, $animalTipo, $animalNome, $animalRaca, $servicoTipo, $valor, $conn)
     {
         $this->clienteNome = $clienteNome;
@@ -45,7 +46,25 @@ class Servico
         return $stmt->execute();
     }
 
-    /* FAZER UMA FUNÇÃO PARA UPDATE AQUI ??? */
+    public function editar($id)
+    {
+        $stmt = $this->conn->prepare("UPDATE servico SET clienteEmail = :clienteEmail, clienteTelefone = :clienteTelefone, 
+    animalTipo = :animalTipo, animalNome = :animalNome, animalRaca = :animalRaca, servicoTipo = :servicoTipo, 
+    valor = :valor WHERE id = :id AND clienteNome = :clienteNome");
+
+        $stmt->bindParam(":clienteNome", $this->clienteNome);
+        $stmt->bindParam(":clienteEmail", $this->clienteEmail);
+        $stmt->bindParam(":clienteTelefone", $this->clienteTelefone);
+        $stmt->bindParam(":animalTipo", $this->animalTipo);
+        $stmt->bindParam(":animalNome", $this->animalNome);
+        $stmt->bindParam(":animalRaca", $this->animalRaca);
+        $stmt->bindParam(":servicoTipo", $this->servicoTipo);
+        $stmt->bindParam(":valor", $this->valor);
+        $stmt->bindParam(":id", $id);
+
+        $stmt->execute();
+    }
+    
 }
 
 ?>

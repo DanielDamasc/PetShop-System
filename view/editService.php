@@ -26,6 +26,9 @@ if (!isset($_SESSION['email'])) {
         <input type="hidden" name="type" value="edit">
         <input type="hidden" name="id" value="<?= $oneservice['id'] ?>">
 
+        <!-- Hidden clienteNome -->
+        <input type="hidden" name="clienteNome" value="<?= $oneservice['clienteNome'] ?>">
+
         <!-- O nome do cliente é o único atributo que não pode ser editado -->
 
         <div class="form-group">
@@ -75,15 +78,15 @@ if (!isset($_SESSION['email'])) {
 
         <div class="form-group" style="margin-top: 16px;">
             <label for="valor">Valor do Serviço</label>
-            <input type="number" class="form-control" name="valor" id="valor"
-                placeholder="Insira o valor do serviço" step="0.01" value="<?= $oneservice['valor'] ?>">
+            <input type="number" class="form-control" name="valor" id="valor" placeholder="Insira o valor do serviço"
+                step="0.01" value="<?= $oneservice['valor'] ?>">
         </div>
 
         <div class="d-flex justify-content-between">
             <button type="submit" class="btn btn-primary">Atualizar</button>
             <?php include_once("../components/backbtn.html"); ?>
         </div>
-        
+
     </form>
 </main>
 

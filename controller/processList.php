@@ -1,6 +1,7 @@
 <?php
 
 include_once("../controller/connection.php");
+require_once("../model/service.php");
 
 $id;
 
@@ -37,13 +38,16 @@ if (!empty($id)) {
 
 
 
-/* Para a funcionalidade de editar */
+/* Para a funcionalidade de editar (usando POO) */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if ($_POST["type"] === "edit") {
     /* id para saber de qual vai atualizar */
     $id = $_POST["id"];
+
+    /* Nome do Cliente que veio do hidden para editar */
+    $clienteNome = $_POST["clienteNome"];
 
     $clienteEmail = $_POST["clienteEmail"];
     $clienteTelefone = $_POST["clienteTelefone"];
@@ -53,23 +57,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $servicoTipo = $_POST["servicoTipo"];
     $valor = $_POST["valor"];
 
-    $stmt = $conn->prepare("UPDATE servico SET clienteEmail = :clienteEmail, clienteTelefone = :clienteTelefone, 
-    animalTipo = :animalTipo, animalNome = :animalNome, animalRaca = :animalRaca, servicoTipo = :servicoTipo, 
-    valor = :valor WHERE id = :id");
+    $service = new Servico(
+      $clienteNome,
+      $clienteEmail,
+      $clienteTelefone,
+      $animalTipo,
+      $animalNome,
+      $animalRaca,
+      $servicoTipo,
+      $valor,
+      $conn
+    );
 
-    $stmt->bindParam(":clienteEmail", $clienteEmail);
-    $stmt->bindParam(":clienteTelefone", $clienteTelefone);
-    $stmt->bindParam(":animalTipo", $animalTipo);
-    $stmt->bindParam(":animalNome", $animalNome);
-    $stmt->bindParam(":animalRaca", $animalRaca);
-    $stmt->bindParam(":servicoTipo", $servicoTipo);
-    $stmt->bindParam(":valor", $valor);
-    $stmt->bindParam(":id", $id);
-
-    $stmt->execute();
+    /* Chama a função de editar da classe no model */
+    $service->editar($id);
 
     /* Redireciona para a página inicial após o update */
     header("Location: ../view/home.php");
+    exit;
 
   }
 
