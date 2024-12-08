@@ -19,6 +19,12 @@
 
 <body>
     <!-- Formatação do header de todas as páginas -->
-    <header class="d-flex justify-content-center align-items-center">
-        <h1>PetShop Order Service</h1>
+    <header class="d-flex justify-content-between align-items-center px-3">
+        <h1 class="flex-grow-1 text-center">PetShop Order Service</h1>
+        <?php session_start(); ?>
+        <?php if (isset($_SESSION["email"])): ?>
+            <a style="font-size: 32px; color: white;" href="../controller/processLogout.php">
+                <i class="fa fa-sign-out"></i>
+            </a>
+        <?php endif; ?>
     </header>

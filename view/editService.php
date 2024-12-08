@@ -5,8 +5,6 @@ include_once("../view/header.php");
 /* Precisa desse include para enxergar os elementos vindos do select por id */
 include_once("../controller/processList.php");
 
-session_start();
-
 /* Não deixa usuário entrar nessa URL se não tiver feito login */
 if (!isset($_SESSION["email"])) {
     header("Location: ../view/index.php");

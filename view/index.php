@@ -3,6 +3,12 @@
 include_once("../view/header.php");
 include("../controller/processLogin.php");
 
+/* Redireciona para a home quando tem SESSION */
+if(isset($_SESSION["email"])){
+    header("Location: ../view/home.php");
+}
+
+
 ?>
 
 <main>
