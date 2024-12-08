@@ -28,6 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $service->salvar();
 
+    /* Mensagem de operação CREATE */
+    session_start();
+    $_SESSION["msg"] = "Serviço criado com sucesso!";
+
     /* Encerra a variável da conexão */
     $conn = null;
 

@@ -68,6 +68,7 @@ class Servico
         $stmt->bindParam(":id", $id);
 
         $stmt->execute();
+
     }
 
     public function deletar($id)
@@ -91,7 +92,7 @@ class Servico
         return $services;
     }
 
-    public function mostrarUnico($id) 
+    public function mostrarUnico($id)
     {
         $stmt = $this->conn->prepare("SELECT * FROM servico WHERE id = :id");
         $stmt->bindParam(":id", $id);

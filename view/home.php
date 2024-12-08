@@ -1,8 +1,6 @@
 <?php
-
 include_once("../view/header.php");
 include_once("../controller/processList.php");
-
 
 /* Não deixa usuário entrar nessa URL se não tiver feito login */
 if (!isset($_SESSION["email"])) {
@@ -14,6 +12,13 @@ if (!isset($_SESSION["email"])) {
 
 <main>
     <div class="container">
+        <!-- Verifica se tem msg de operação -->
+        <?php if (isset($_SESSION["msg"]) && $_SESSION["msg"] != ''): ?>
+            <p style="max-width: 800px; margin: 0 auto;" class="alert alert-success text-center mt-3">
+                <?= $_SESSION["msg"] ?> </p>
+        <?php endif;
+        $_SESSION["msg"] = ""; ?>
+
         <h1 id="main-title">Meus Serviços</h1>
 
         <!-- Faz a contagem dos serviços para decidir tratamento -->

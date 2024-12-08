@@ -24,7 +24,7 @@ if (!empty($id)) {
 
 } else {
 
-  /* Retorna todos os contatos */
+  /* Retorna todos os serviço */
 
   /* Incializa a variável que vai receber os serviços do método mostrarTodos */
   $services = [];
@@ -73,6 +73,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     /* Chama a função de editar da classe no model */
     $service->editar($id);
 
+    /* Mensagem de operação UPDATE */
+    session_start();
+    $_SESSION["msg"] = "Serviço atualizado com sucesso!";
+
     /* Redireciona para a página inicial após o update */
     header("Location: ../view/home.php");
     exit;
@@ -86,6 +90,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     /* Chama a função para deletar um registro no model */
     $service->deletar($id);
+
+    /* Mensagem de operação DELETE */
+    session_start();
+    $_SESSION["msg"] = "Serviço deletado com sucesso!";
 
     /* Fica na mesma página após o delete */
     header("Location: ../view/home.php");
