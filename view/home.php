@@ -51,12 +51,10 @@ if (!isset($_SESSION["email"])) {
                                         class="far fa-edit edit-icon"></i></a>
 
                                 <!-- Versatilidade para fazer o delete usando form -->
-                                <form class="delete-form" action="../controller/processList.php" method="POST">
-                                    <!-- Hidden para informar o tipo de operação e quem deletar -->
-                                    <input type="hidden" name="type" value="delete">
-                                    <input type="hidden" name="id" value="<?= $oneservice["id"] ?>">
+                                <!-- Versão alterada para permitir o delete de forma assíncrona (AJAX) -->
+                                <form class="delete-form" data-id="<?= $oneservice["id"]?>">
 
-                                    <button class="delete-btn" type="submit"><i class="fas fa-times delete-icon"></i></button>
+                                    <button class="delete-btn" type="button"><i class="fas fa-times delete-icon"></i></button>
                                 </form>
 
                             </td>
@@ -75,6 +73,9 @@ if (!isset($_SESSION["email"])) {
             <i class="fas fa-plus"></i>
         </a>
     </div>
+
+    <!-- Adição do intermediário para o delete (AJAX) -->
+    <script src="../AJAX/delete.js"></script>
 
 </main>
 

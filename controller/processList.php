@@ -85,22 +85,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     /* id para saber de qual vai deletar */
     $id = $_POST["id"];
 
-    /* Chama apenas o construtor que passa a conexão (não precisa de argumentos) */
-    $service = new Servico($conn);
+    if ($id) {
+      /* Chama o construtor e passa a conexão */
+      $service = new Servico($conn);
 
-    /* Chama a função para deletar um registro no model */
-    $service->deletar($id);
+      /* Função deletar, retorna true ou false */
+      $deleted = $service->deletar($id);
 
-    /* Mensagem de operação DELETE */
-    session_start();
-    $_SESSION["msg"] = "Serviço deletado com sucesso!";
+      if ($deleted) {
+        /* Retorna JSON de sucesso */
+        echo json_encode(['success' => true, 'message' => 'Serviço deletado com sucesso.']);
+      } else {
+        /* Retorna JSON de erro */
+        echo json_encode(['success' => false, 'message' => 'Erro ao deletar o serviço.']);
+      }
+      /* Retorna JSON para ID inválido */
+    } else {
+      echo json_encode(['success' => false, 'message' => 'ID inválido.']);
+    }
 
-    /* Fica na mesma página após o delete */
-    header("Location: ../view/home.php");
     exit;
   }
 
 }
 
+/* Mensagem de operação DELETE */
+// session_start();
+// $_SESSION["msg"] = "Serviço deletado com sucesso!";
 
 ?>

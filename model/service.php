@@ -77,7 +77,7 @@ class Servico
 
         $stmt->bindParam(":id", $id);
 
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public function mostrarTodos()
