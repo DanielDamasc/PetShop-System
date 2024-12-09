@@ -1,9 +1,11 @@
 <?php
 
 include_once("../view/header.php");
+
+/* Form não tem action, ao invés disso inclui o arquivo de processamento */
 include("../controller/processLogin.php");
 
-/* Redireciona para a home quando tem SESSION */
+/* Redireciona para a home quando tem email na SESSION */
 if(isset($_SESSION["email"])){
     header("Location: ../view/home.php");
 }
@@ -45,6 +47,7 @@ if(isset($_SESSION["email"])){
                         placeholder="Insira a sua senha" required>
                 </div>
 
+                <!-- Exibe mensagens de erro do process -->
                 <?php
                 if (!empty($erro_user)) {
                     echo '<div class="alert alert-danger">' . htmlspecialchars($erro_user) . '</div>';

@@ -2,10 +2,10 @@
 
 include_once("../view/header.php");
 
-/* Precisa desse include para enxergar os elementos vindos do select por id */
+/* Precisa desse include para ver os dados do Array $oneservice */
 include_once("../controller/processList.php");
 
-/* Não deixa usuário entrar nessa URL se não tiver feito login */
+/* Não deixa usuário entrar nessa URL sem login */
 if (!isset($_SESSION["email"])) {
     header("Location: ../view/index.php");
     exit;
@@ -20,11 +20,11 @@ if (!isset($_SESSION["email"])) {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);" class="container p-4 border border-primary" method="POST"
         action="../controller/processList.php">
 
-        <!-- Hidden inputs, usados para auxiliar o arquivo de processamento no POST -->
+        <!-- Hidden inputs, usados para auxiliar no arquivo de processamento -->
         <input type="hidden" name="type" value="edit">
         <input type="hidden" name="id" value="<?= $oneservice["id"] ?>">
 
-        <!-- Hidden clienteNome -->
+        <!-- Hidden (clienteNome) -->
         <input type="hidden" name="clienteNome" value="<?= $oneservice["clienteNome"] ?>">
 
         <!-- O nome do cliente é o único atributo que não pode ser editado -->
@@ -61,20 +61,19 @@ if (!isset($_SESSION["email"])) {
         </div>
 
         <!-- Usar required em apenas um radio funciona para todos -->
-        <!-- Uso do ternário em cada input para ver se é o valor correspondente -->
         <div class="form-check">
             <input class="form-check-input" type="radio" value="banho" name="servicoTipo" id="banho" required
-            <?= $oneservice["servicoTipo"] === 'banho' ? 'checked' : '' ?>>
+                <?= $oneservice["servicoTipo"] === 'banho' ? 'checked' : '' ?>>
             <label class="form-check-label" for="banho">Banho</label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" value="tosa" name="servicoTipo" id="tosa"
-            <?= $oneservice["servicoTipo"] === 'tosa' ? 'checked' : '' ?>>
+                <?= $oneservice["servicoTipo"] === 'tosa' ? 'checked' : '' ?>>
             <label class="form-check-label" for="tosa">Tosa</label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" value="unha" name="servicoTipo" id="unha"
-            <?= $oneservice["servicoTipo"] === 'unha' ? 'checked' : '' ?>>
+                <?= $oneservice["servicoTipo"] === 'unha' ? 'checked' : '' ?>>
             <label class="form-check-label" for="unha">Unhas</label>
         </div>
 

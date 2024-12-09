@@ -1,5 +1,6 @@
 <?php
 
+/* Inicia session em todos os templates */
 session_start();
 
 ?>
@@ -27,6 +28,8 @@ session_start();
     <!-- Formatação do header de todas as páginas -->
     <header class="d-flex justify-content-between align-items-center px-3">
         <h1 class="flex-grow-1 text-center">PetShop Order Service</h1>
+
+        <!-- Sempre que tiver email na SESSION, o usuário pode fazer Logout -->
         <?php if (isset($_SESSION["email"])): ?>
             <a style="font-size: 32px; color: white;" href="../controller/processLogout.php">
                 <i class="fa fa-sign-out"></i>

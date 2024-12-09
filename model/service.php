@@ -13,13 +13,13 @@ class Servico
     private $valor;
     private $conn;
 
-    /* Construtor nulo (facilita para fazer o delete) */
+    /* Construtor nulo (facilita algumas operações) */
     public function __construct($conn)
     {
         $this->conn = $conn;
     }
 
-    /* Método para inicializar os atributos (funciona como o contrutor) */
+    /* Método para inicializar os atributos (funciona como o construtor) */
     public function inicializar($clienteNome, $clienteEmail, $clienteTelefone, $animalTipo, $animalNome, $animalRaca, $servicoTipo, $valor)
     {
         $this->clienteNome = $clienteNome;
@@ -32,7 +32,7 @@ class Servico
         $this->valor = $valor;
     }
 
-    /* Função para create de um novo serviço, é utilizada no arquivo processService.php */
+    /* CREATE de um serviço (processService.php) */
     public function salvar()
     {
         $stmt = $this->conn->prepare("INSERT INTO 
@@ -51,6 +51,7 @@ class Servico
         return $stmt->execute();
     }
 
+    /* EDIT de um serviço (processList.php) */
     public function editar($id)
     {
         $stmt = $this->conn->prepare("UPDATE servico SET clienteEmail = :clienteEmail, clienteTelefone = :clienteTelefone, 
@@ -71,6 +72,7 @@ class Servico
 
     }
 
+    /* DELETE de um serviço (processList.php) */
     public function deletar($id)
     {
         $stmt = $this->conn->prepare("DELETE FROM servico WHERE id = :id");
@@ -80,6 +82,7 @@ class Servico
         return $stmt->execute();
     }
 
+    /* SELECT de todos os serviços (processList.php) */
     public function mostrarTodos()
     {
         $services = [];
@@ -92,6 +95,7 @@ class Servico
         return $services;
     }
 
+    /* SELECT de um serviços (processList.php) */
     public function mostrarUnico($id)
     {
         $stmt = $this->conn->prepare("SELECT * FROM servico WHERE id = :id");

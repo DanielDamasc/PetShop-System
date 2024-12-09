@@ -1,7 +1,7 @@
 <?php
 include_once("../controller/connection.php");
 
-/* Inicializa as variáveis que vão exibir as mensagens de erro */
+/* Inicializa variáveis das mensagens de erro */
 $erro_pass = "";
 $erro_user = "";
 
@@ -11,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $senha = $_POST["l_senha"];
 
     $stmt = $conn->prepare("SELECT email, senha FROM user WHERE email = :email");
-    ;
     $stmt->bindParam(":email", $email, );
     $stmt->execute();
 
@@ -24,12 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             /* Verifica se a senha bate */
             if (password_verify($senha, $hash_pass)) {
 
-                /* Inicia uma variável de sessão usando o email */
+                /* Coloca o email na SESSION */
                 session_start();
-
                 $_SESSION["email"] = $row["email"];
 
-                /* Redireciona o usuário para a página de home */
+                /* Redireciona o usuário para a home */
                 header("Location: ../view/home.php");
                 exit;
 
@@ -43,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 }
 
-/* Encerra a variável da conexão */
+/* Encerra a conexão */
 $conn = null;
 
 ?>

@@ -1,10 +1,12 @@
 <?php
 
+/* Inclui a conexão e a classe para criar os objetos */
 include_once("../controller/connection.php");
 require_once("../model/service.php");
 
 $id;
 
+/* Captura id na URL */
 if (!empty($_GET)) {
   $id = $_GET["id"];
 }
@@ -13,36 +15,36 @@ if (!empty($id)) {
 
   /* Retorna os dados de um contato (showService) */
 
-  /* Incializa a variável que vai receber o serviço do método mostrarUnico */
+  /* Variável que vai receber o serviço específico */
   $oneservice = null;
 
-  /*  Chama o construtor apenas com a conexão de argumento */
+  /* Chama o construtor apenas com a conexão de argumento */
   $service = new Servico($conn);
 
-  /* Chama o método que seleciona os atributos de um unico registro (para icon eye) */
+  /* Chama o método que seleciona os atributos de um único registro */
   $oneservice = $service->mostrarUnico($id);
 
 } else {
 
-  /* Retorna todos os serviço */
+  /* Retorna todos os serviços (home) */
 
-  /* Incializa a variável que vai receber os serviços do método mostrarTodos */
+  /* Array que vai receber todos os serviços */
   $services = [];
 
-  /*  Chama o construtor apenas com a conexão de argumento */
+  /* Chama o construtor apenas com a conexão de argumento */
   $service = new Servico($conn);
 
-  /* Chama o método que seleciona os principais atributos de todos os registros (para a listagem na home) */
+  /* Chama o método que seleciona alguns atributos de todos os registros */
   $services = $service->mostrarTodos();
 
 }
 
-/* PROCESSAMENTO PARA EDITAR e DELETAR */
+/* Processamento para editar e deletar */
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   if ($_POST["type"] === "edit") {
-    /* id para saber de qual vai atualizar */
+    /* id hidden para saber de qual vai atualizar */
     $id = $_POST["id"];
 
     /* Nome do Cliente que veio do hidden */
@@ -58,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     /* Chama o construtor apenas com a conexão de argumento */
     $service = new Servico($conn);
+
     /* Chama o método que inicializa o restante das variáveis */
     $service->inicializar(
       $clienteNome,
@@ -70,14 +73,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       $valor
     );
 
-    /* Chama a função de editar da classe no model */
+    /* Chama o método de editar do model */
     $service->editar($id);
 
-    /* Mensagem de operação UPDATE */
+    /* Mensagem de SESSION do UPDATE */
     session_start();
     $_SESSION["msg"] = "Serviço atualizado com sucesso!";
 
-    /* Redireciona para a página inicial após o update */
+    /* Redireciona para a página inicial */
     header("Location: ../view/home.php");
     exit;
 
@@ -108,9 +111,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   }
 
 }
-
-/* Mensagem de operação DELETE */
-// session_start();
-// $_SESSION["msg"] = "Serviço deletado com sucesso!";
 
 ?>

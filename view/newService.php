@@ -2,7 +2,7 @@
 include_once("../view/header.php");
 
 
-/* Não deixa usuário entrar nessa URL se não tiver feito login */
+/* Não deixa usuário entrar nessa URL sem login */
 if (!isset($_SESSION["email"])) {
     header("Location: ../view/index.php");
     exit;
@@ -12,8 +12,7 @@ if (!isset($_SESSION["email"])) {
 
 <main>
     <h1 id="main-title">Novo Serviço</h1>
-    <!-- Coloca o action para o arquivo de processamento que depois retorna os usuários para a HOME -->
-    <!-- COMO FAZER O TRATAMENTO DOS CAMPOS ??? -->
+    <!-- Tem action para o arquivo de processamento -->
     <form style="margin-top: 0.6rem;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);" class="container p-4 border border-primary" method="POST"
@@ -68,15 +67,15 @@ if (!isset($_SESSION["email"])) {
 
         <div class="form-group" style="margin-top: 16px;">
             <label for="valor">Valor do Serviço</label>
-            <input type="number" class="form-control" name="valor" id="valor"
-                placeholder="Insira o valor do serviço" step="0.01">
+            <input type="number" class="form-control" name="valor" id="valor" placeholder="Insira o valor do serviço"
+                step="0.01">
         </div>
 
         <div class="d-flex justify-content-between">
             <button type="submit" class="btn btn-primary">Cadastrar Serviço</button>
             <?php include_once("../components/backbtn.html"); ?>
         </div>
-        
+
     </form>
 </main>
 

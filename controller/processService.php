@@ -1,14 +1,15 @@
 <?php
 
+/* Importa conexão, classe Service, e arquivo que trata os dados */
 require_once("../controller/connection.php");
 require_once("../model/service.php");
 include_once("../utilities/formatData.php");
 
-/* Arquivo que processa o CREATE de serviços */
+/* Create */
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    /* Função que irá realizar a sanitização dos dados */
+    /* Função de sanitização dos dados */
     $dados = sanitizacao($_POST);
 
     /* Chama o construtor apenas com a conexão de argumento */
@@ -28,11 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $service->salvar();
 
-    /* Mensagem de operação CREATE */
+    /* Mensagem de SESSION do CREATE */
     session_start();
     $_SESSION["msg"] = "Serviço criado com sucesso!";
 
-    /* Encerra a variável da conexão */
+    /* Encerra a conexão */
     $conn = null;
 
     /* Redireciona para a home */
